@@ -1,13 +1,15 @@
 from django import template
+from django.urls import NoReverseMatch
 from django.core.urlresolvers import reverse
 
-from wagtail.wagtailcore.models import Page
 try:
-    # Python 3
+    # Wagtail 2 & Python 3
     from urllib.parse import unquote_plus
+    from wagtail.core.models import Page
 except ImportError:
-    # Python 2
+    # Wagtail 1.x & Python 2
     from urllib import unquote_plus
+    from wagtail.wagtailcore.models import Page
 
 register = template.Library()
 
@@ -22,7 +24,7 @@ def message404(context, max_results=5):
     try:
         # Some sites may not have search.
         reverse('search')
-    except:
+    except NoReverseMatch:
         search = False
 
     return {
