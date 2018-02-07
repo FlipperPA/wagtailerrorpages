@@ -7,7 +7,7 @@ try:
     from urllib.parse import unquote_plus
     from wagtail.core.models import Page
 except ImportError:
-    # Wagtail 1.x & Python 2
+    # Wagtail 1 & Python 2
     from urllib import unquote_plus
     from wagtail.wagtailcore.models import Page
 
