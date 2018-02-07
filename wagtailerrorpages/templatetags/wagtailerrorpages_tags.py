@@ -1,15 +1,19 @@
 from django import template
-from django.urls import NoReverseMatch
-from django.core.urlresolvers import reverse
+from django.urls import NoReverseMatch, reverse
 
 try:
-    # Wagtail 2 & Python 3
-    from urllib.parse import unquote_plus
+    # Wagtail 2
     from wagtail.core.models import Page
 except ImportError:
-    # Wagtail 1 & Python 2
-    from urllib import unquote_plus
+    # Wagtail 1
     from wagtail.wagtailcore.models import Page
+
+try:
+    # Python 3
+    from urllib.parse import unquote_plus
+except ImportError:
+    # Python 2
+    from urllib import unquote_plus
 
 register = template.Library()
 
